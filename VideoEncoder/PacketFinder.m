@@ -57,17 +57,19 @@ typedef struct {
 @property (nonatomic, readwrite) NSData *sps;
 @property (nonatomic, readwrite) NSData *pps;
 @property (nonatomic, readwrite) NSData *payload;
+@property (nonatomic, readwrite) NSUInteger timestamp;
 
 @end
 
 @implementation Packet
 
-+ (instancetype)packetWithSps:(NSData *)sps pps:(NSData *)pps payload:(NSData *)payload
++ (instancetype)packetWithSps:(NSData *)sps pps:(NSData *)pps payload:(NSData *)payload timestamp:(NSUInteger)timestamp
 {
     Packet *packet = [[Packet alloc] init];
     packet.sps = sps;
     packet.pps = pps;
     packet.payload = payload;
+    packet.timestamp = timestamp;
     
     return packet;
 }
@@ -154,13 +156,13 @@ typedef struct {
             break;
     }
     
-    NSLog(@"Stream ID: %u, Frame type: %@, frame number: %u %u/%u chunks, %u/%u slices", packet.stream_id, frameType, packet.frame_number, packet.chunk_index, packet.total_chunks, packet.slice_index, packet.total_slices);
+    NSLog(@"Stream ID: %u, Frame type: %@, frame number: %u timestamp: %d", packet.stream_id, frameType, packet.frame_number, packet.timestamp);
     NSLog(@"Packet SPS: %ld PPS: %ld Payload: %ld", sps.length, pps.length, data.length);
 
     NSData *remainder = [self.remainder subdataWithRange:NSMakeRange(start+payloadSize, [self.remainder length]-start-payloadSize)];
     self.remainder = remainder;
     
-    return [Packet packetWithSps:sps pps:pps payload:data];
+    return [Packet packetWithSps:sps pps:pps payload:data timestamp:packet.timestamp];
 }
 
 @end

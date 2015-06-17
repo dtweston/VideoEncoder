@@ -36,8 +36,6 @@ NSString *NSStringFromOSStatus(OSStatus errCode)
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.queue = dispatch_queue_create("Video Capture", NULL);
-    
     // Do any additional setup after loading the view, typically from a nib.
     AVSampleBufferDisplayLayer *displayLayer = [[AVSampleBufferDisplayLayer alloc] init];
     displayLayer.videoGravity = AVLayerVideoGravityResizeAspect;
@@ -51,8 +49,8 @@ NSString *NSStringFromOSStatus(OSStatus errCode)
     CMTimebaseCreateWithMasterClock( CFAllocatorGetDefault(), CMClockGetHostTimeClock(), &controlTimebase );
     
     self.displayLayer.controlTimebase = controlTimebase;
-    CMTimebaseSetTime(self.displayLayer.controlTimebase, CMTimeMake(5, 1));
-    CMTimebaseSetRate(self.displayLayer.controlTimebase, 1.0);
+    CMTimebaseSetTime(self.displayLayer.controlTimebase, CMTimeMake(184000, 1000));
+    CMTimebaseSetRate(self.displayLayer.controlTimebase, 1000.0);
     
     [[NSNotificationCenter defaultCenter] addObserverForName:AVSampleBufferDisplayLayerFailedToDecodeNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         NSError *error = note.userInfo[AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey];
@@ -109,16 +107,12 @@ NSString *NSStringFromOSStatus(OSStatus errCode)
                 CMSampleBufferRef sampleBuffer;
                 CMSampleTimingInfo timing[1];
                 timing[0].duration = kCMTimeIndefinite;
-                timing[0].presentationTimeStamp = CMTimeMakeWithSeconds(0.1, 1);
+                timing[0].presentationTimeStamp = CMTimeMakeWithSeconds((Float64)packet.timestamp/1000.0, 1000);
                 timing[0].decodeTimeStamp = kCMTimeInvalid;
                 size_t size[1] = { offset };
-                status = CMSampleBufferCreate(kCFAllocatorDefault, blockBuffer, YES, NULL, NULL, format, 1, 0, NULL, 1, size, &sampleBuffer);
+                status = CMSampleBufferCreate(kCFAllocatorDefault, blockBuffer, YES, NULL, NULL, format, 1, 1, timing, 1, size, &sampleBuffer);
                 NSAssert(status == noErr, @"Unable to create sample buffer");
                 
-                CFArrayRef attachments = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, YES);
-                NSMutableDictionary *dict = (NSMutableDictionary *)CFArrayGetValueAtIndex(attachments, 0);
-                [dict setObject:(id)kCFBooleanTrue forKey:(id)kCMSampleAttachmentKey_DisplayImmediately];
-
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [layer enqueueSampleBuffer:sampleBuffer];
                 });

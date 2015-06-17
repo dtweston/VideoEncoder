@@ -13,6 +13,7 @@
 @property (nonatomic, readonly) NSData *sps;
 @property (nonatomic, readonly) NSData *pps;
 @property (nonatomic, readonly) NSData *payload;
+@property (nonatomic, readonly) NSUInteger timestamp;
 
 @end
 
