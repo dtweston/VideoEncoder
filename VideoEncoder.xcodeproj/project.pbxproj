@@ -14,6 +14,8 @@
 		B69E71C11AB0F71200C862F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B69E71C01AB0F71200C862F7 /* Images.xcassets */; };
 		B69E71C41AB0F71200C862F7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69E71C21AB0F71200C862F7 /* LaunchScreen.xib */; };
 		B69E71D01AB0F71200C862F7 /* VideoEncoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B69E71CF1AB0F71200C862F7 /* VideoEncoderTests.m */; };
+		B69E71E11AB3981400C862F7 /* drone.h264 in Resources */ = {isa = PBXBuildFile; fileRef = B69E71E01AB3981400C862F7 /* drone.h264 */; };
+		B69E71E41AB4818F00C862F7 /* PacketFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B69E71E31AB4818F00C862F7 /* PacketFinder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,9 @@
 		B69E71C91AB0F71200C862F7 /* VideoEncoderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoEncoderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B69E71CE1AB0F71200C862F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B69E71CF1AB0F71200C862F7 /* VideoEncoderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoEncoderTests.m; sourceTree = "<group>"; };
+		B69E71E01AB3981400C862F7 /* drone.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; name = drone.h264; path = ../../../drone.h264; sourceTree = "<group>"; };
+		B69E71E21AB4818F00C862F7 /* PacketFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketFinder.h; sourceTree = "<group>"; };
+		B69E71E31AB4818F00C862F7 /* PacketFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketFinder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +86,7 @@
 		B69E71B21AB0F71200C862F7 /* VideoEncoder */ = {
 			isa = PBXGroup;
 			children = (
+				B69E71E01AB3981400C862F7 /* drone.h264 */,
 				B69E71B71AB0F71200C862F7 /* AppDelegate.h */,
 				B69E71B81AB0F71200C862F7 /* AppDelegate.m */,
 				B69E71BA1AB0F71200C862F7 /* ViewController.h */,
@@ -89,6 +95,8 @@
 				B69E71C01AB0F71200C862F7 /* Images.xcassets */,
 				B69E71C21AB0F71200C862F7 /* LaunchScreen.xib */,
 				B69E71B31AB0F71200C862F7 /* Supporting Files */,
+				B69E71E21AB4818F00C862F7 /* PacketFinder.h */,
+				B69E71E31AB4818F00C862F7 /* PacketFinder.m */,
 			);
 			path = VideoEncoder;
 			sourceTree = "<group>";
@@ -199,6 +207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B69E71E11AB3981400C862F7 /* drone.h264 in Resources */,
 				B69E71BF1AB0F71200C862F7 /* Main.storyboard in Resources */,
 				B69E71C41AB0F71200C862F7 /* LaunchScreen.xib in Resources */,
 				B69E71C11AB0F71200C862F7 /* Images.xcassets in Resources */,
@@ -220,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69E71BC1AB0F71200C862F7 /* ViewController.m in Sources */,
+				B69E71E41AB4818F00C862F7 /* PacketFinder.m in Sources */,
 				B69E71B91AB0F71200C862F7 /* AppDelegate.m in Sources */,
 				B69E71B61AB0F71200C862F7 /* main.m in Sources */,
 			);
@@ -343,6 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dave Weston (7XV39659FN)";
 				INFOPLIST_FILE = VideoEncoder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -412,6 +423,7 @@
 				B69E71D51AB0F71200C862F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B69E71D61AB0F71200C862F7 /* Build configuration list for PBXNativeTarget "VideoEncoderTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +432,7 @@
 				B69E71D81AB0F71200C862F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
